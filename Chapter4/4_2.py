@@ -1,24 +1,32 @@
 import turtle
 import math
+import sys
 from polygon import *
 
 def draw_flower(t,pedal,length):
     t.lt(90)
     start_angle = 180/pedal
     outter_angle = 360 / pedal
-    interval  = 180 - outter_angle
-    radius = math.cos((180-360/pedal)/2*math.pi/180)*length*2
-    t.pu()
     t.rt(start_angle)
-    t.fd(length)
-    t.lt(outter_angle)
-    t.pd()
     for i in range(int(pedal)):
-        arc(t,radius,interval)
-        t.lt(interval)
-
+        t.rt(30)
+        arc(t,length,60)
+        t.lt(120)
+        arc(t,length,60)
+        t.lt(150)
+        t.lt(outter_angle)
 
 if __name__ == "__main__":
     bob = turtle.Turtle()
-    draw_flower(bob,7,50)
+    count = 0
+    length = 0
+    if len(sys.argv)>1:
+        count = int(sys.argv[1])
+        if len(sys.argv) > 2:
+            length = int(sys.argv[2])
+    if not count:
+        count = int(input("Pedal Count: "))
+    if not length:
+        length = int(input("Pedal Length: "))
+    draw_flower(bob,count,length)
     input("Enter to continue")
