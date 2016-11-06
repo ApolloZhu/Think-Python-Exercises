@@ -3,12 +3,12 @@ import math
 import sys
 from polygon import *
 
-def draw_flower(t,pedal,length):
+def draw_flower(t,petal_count,length):
     t.lt(90)
-    start_angle = 180/pedal
-    outter_angle = 360 / pedal
+    start_angle = 180 / petal_count
+    outter_angle = 360 / petal_count
     t.rt(start_angle)
-    for i in range(int(pedal)):
+    for i in range(int(petal_count)):
         t.rt(30)
         arc(t,length,60)
         t.lt(120)
@@ -25,8 +25,8 @@ if __name__ == "__main__":
         if len(sys.argv) > 2:
             length = int(sys.argv[2])
     if not count:
-        count = int(input("Pedal Count: "))
+        count = int(input("Petal Count: "))
     if not length:
-        length = int(input("Pedal Length: "))
+        length = int(input("Petal Length: "))
     draw_flower(bob,count,length)
     input("Enter to continue")
