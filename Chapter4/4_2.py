@@ -3,18 +3,17 @@ import math
 import sys
 from polygon import *
 
-def draw_flower(t,petal_count,length):
-    t.lt(90)
-    start_angle = 180 / petal_count
-    outter_angle = 360 / petal_count
-    t.rt(start_angle)
-    for i in range(int(petal_count)):
-        t.rt(30)
+# Referenced from http://greenteapress.com/thinkpython2/code/flower.py
+
+def draw_petal(t,length):
+    for i in range(2):
         arc(t,length,60)
         t.lt(120)
-        arc(t,length,60)
-        t.lt(150)
-        t.lt(outter_angle)
+
+def draw_flower(t,petal_count,length):
+    for i in range(petal_count):
+        draw_petal(t,length)
+        t.lt(360/petal_count)
 
 if __name__ == "__main__":
     bob = turtle.Turtle()
