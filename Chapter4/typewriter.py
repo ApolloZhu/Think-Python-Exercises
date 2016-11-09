@@ -25,7 +25,7 @@ try:
 except ImportError as e:
     message = e.args[0]
     if message.startswith('No module'):
-        raise ImportError(message + 
+        raise ImportError(message +
                           '\nYou have to provide a module named letters.py')
 
 
@@ -75,6 +75,9 @@ def keypress(char):
 def carriage_return():
     """Moves to the beginning of the next line.
     """
+    if bob.busy:
+        return
+    bob.busy = True
     teleport(bob, -180, bob.ycor() - size*3)
     bob.busy = False
 
@@ -100,7 +103,7 @@ teleport(bob, -180, 150)
 # tell world to call keypress when the user presses a key
 screen = bob.getscreen()
 
-for char in string.ascii_lowercase:
+for char in string.ascii_letters:
     screen.onkey(presser(char), char)
 
 screen.onkey(carriage_return, 'Return')
