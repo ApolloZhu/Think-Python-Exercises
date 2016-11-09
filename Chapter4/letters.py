@@ -81,7 +81,8 @@ def draw_a(t,size):
         draw_turning(t,size,0.25,1)
         rt(t)
     incognito(t,vertical,t,fd,t,size,0.5)
-    draw_turning(t,size,1,0.25)
+    draw_turning(t,size,1,0.5)
+
 
 def skip(t,distance):
     seth(t)
