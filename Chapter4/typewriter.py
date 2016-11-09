@@ -107,6 +107,7 @@ for char in string.ascii_letters:
     screen.onkey(presser(char), char)
 
 screen.onkey(carriage_return, 'Return')
+screen.onkey(quit,'Escape')
 
 screen.listen()
 turtle.mainloop()
