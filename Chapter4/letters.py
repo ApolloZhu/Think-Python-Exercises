@@ -31,7 +31,6 @@ def resetting(t,func,*args,**kwargs):
     heading = t.heading()
     func(*args,**kwargs)
     goto(t,*pos)
-    # incognito(t,t.goto,pos)
     seth(t,heading)
 
 def fd(t,size,percentage):
@@ -77,6 +76,9 @@ def draw_rect(t,size,first=0.5,second=1):
         draw_turning(t,size,first,second)
         rt(t)
 
+def draw_vertical_line(t,size):
+    resetting(t,vertical,t,fd,t,size,1)
+
 # Interface
 
 def draw_a(t,size):
@@ -89,27 +91,52 @@ def draw_a(t,size):
 def draw_b(t,size):
     lt(t)
     draw_rect(t,size)
-    resetting(t,fd,t,size,1)
+    # resetting(t,fd,t,size,1)
+    draw_vertical_line(t,size)
     skip(t,size)
 
 def draw_c(t,size):
     lt(t)
     resetting(t,draw_turning,t,size,0.5,1)
-    seth(t)
-    fd(t,size,1)
+    prepare(t,size)
 
 def draw_d(t,size):
     lt(t)
     draw_rect(t,size)
-    seth(t)
-    fd(t,size,1)
-    resetting(t,vertical,t,fd,t,size,1)
+    prepare(t,size)
+    # resetting(t,vertical,t,fd,t,size,1)
+    draw_vertical_line(t,size)
 
 def draw_e(t,size):
     lt(t)
     fd(t,size,0.25)
     draw_rect(t,size,first=0.25)
     teleport(t,size,0,-0.25)
+    prepare(t,size)
+
+def draw_f(t,size):
+    skip(t,size/2)
+    lt(t)
+    resetting(t,draw_turning,t,size,0.7,0.5)
+    draw_turning(t,size,0.5,0.5)
+    at(t)
+    fd(t,size,1)
+    teleport(t,size,1,-0.5)
+
+def draw_g(t,size):
+    lt(t)
+    draw_rect(t,size)
+    prepare(t,size)
+    rt(t)
+    resetting(t,draw_turning,t,size,0.2,1)
+
+def draw_h(t,size):
+    draw_vertical_line(t,size)
+    lt(t)
+    draw_turning(t,size,0.5,1)
+    vertical(t,fd,t,size,-0.5)
+
+def prepare(t,size):
     seth(t)
     fd(t,size,1)
 
