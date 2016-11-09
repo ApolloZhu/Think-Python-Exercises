@@ -82,10 +82,15 @@ def draw_vertical_line(t,size,percentage=1):
 def draw_dot(t):
     t.dot()
 
-def draw_tail(t,size,percentage=1):
+def draw_tail(t,size,percentage=0.7,endingLeft=True):
     heading = t.heading()
-    seth(t,270)
-    resetting(t,draw_turning,t,size,0.2,percentage)
+    if endingLeft:
+        seth(t,270)
+        resetting(t,draw_turning,t,size,0.2,percentage)
+    else:
+        teleport(t,size,percentage,-0.2)
+        seth(t,180)
+        draw_turning(t,size,percentage,0.2)
     seth(t,heading)
 
 # Interface
@@ -145,7 +150,7 @@ def draw_h(t,size):
     vertical(t,fd,t,size,-0.5)
 
 def draw_i(t,size):
-    skip(t,size/2)
+    skip(t,size,0.5)
     draw_vertical_line(t,size,0.5)
     teleport(t,size,0,0.7)
     draw_dot(t)
@@ -153,13 +158,28 @@ def draw_i(t,size):
 
 def draw_j(t,size):
     draw_i(t,size)
-    skip(t,-size/2)
-    draw_tail(t,size,0.5)
+    skip(t,size,-0.5)
+    draw_tail(t,size,percentage=0.35)
     skip(t,size,0.5)
+
+def draw_k(t,size):
+    skip(t,size,0.35)
+    draw_vertical_line(t,size)
+    skip(t,size,0.35)
+    side = 0.35*math.sqrt(2)
+    lt(t,135)
+    resetting(t,draw_turning,t,size,side,side)
+    skip(t,size,0.45)
+
+def draw_l(t,size):
+    skip(t,size,0.4)
+    draw_vertical_line(t,size)
+    draw_tail(t,size,percentage=0.35,endingLeft=False)
+    skip(t,size,0.6)
 
 def prepare(t,size,percentage=1):
     seth(t)
     fd(t,size,percentage)
 
-def skip(t,distance,percentage=1):
-    incognito(t,prepare,t,distance,percentage)
+def skip(t,size,percentage=1):
+    incognito(t,prepare,t,size,percentage)
