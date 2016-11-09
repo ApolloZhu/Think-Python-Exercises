@@ -76,8 +76,17 @@ def draw_rect(t,size,first=0.5,second=1):
         draw_turning(t,size,first,second)
         rt(t)
 
-def draw_vertical_line(t,size):
-    resetting(t,vertical,t,fd,t,size,1)
+def draw_vertical_line(t,size,percentage=1):
+    resetting(t,vertical,t,fd,t,size,percentage)
+
+def draw_dot(t):
+    t.dot()
+
+def draw_tail(t,size,percentage=1):
+    heading = t.heading()
+    seth(t,270)
+    resetting(t,draw_turning,t,size,0.2,percentage)
+    seth(t,heading)
 
 # Interface
 
@@ -127,8 +136,7 @@ def draw_g(t,size):
     lt(t)
     draw_rect(t,size)
     prepare(t,size)
-    rt(t)
-    resetting(t,draw_turning,t,size,0.2,1)
+    draw_tail(t,size)
 
 def draw_h(t,size):
     draw_vertical_line(t,size)
@@ -136,10 +144,22 @@ def draw_h(t,size):
     draw_turning(t,size,0.5,1)
     vertical(t,fd,t,size,-0.5)
 
-def prepare(t,size):
-    seth(t)
-    fd(t,size,1)
+def draw_i(t,size):
+    skip(t,size/2)
+    draw_vertical_line(t,size,0.5)
+    teleport(t,size,0,0.7)
+    draw_dot(t)
+    teleport(t,size,0.5,-0.7)
 
-def skip(t,distance):
+def draw_j(t,size):
+    draw_i(t,size)
+    skip(t,-size/2)
+    draw_tail(t,size,0.5)
+    skip(t,size,0.5)
+
+def prepare(t,size,percentage=1):
     seth(t)
-    incognito(t,fd,t,distance,1)
+    fd(t,size,percentage)
+
+def skip(t,distance,percentage=1):
+    incognito(t,prepare,t,distance,percentage)
