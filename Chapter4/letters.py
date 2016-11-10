@@ -66,18 +66,20 @@ def vertical(t,func,*args,**kwargs):
 def draw_square(t,size,percentage):
     square(t,distance(size,percentage))
 
-def draw_turning(t,size,first,second):
-    """
-    Postcondition: Only 2 percentages are given
-    """
+def draw_turning(t,size,first,second,rtAngle=90):
     fd(t,size,first)
-    rt(t)
+    rt(t,rtAngle)
     fd(t,size,second)
 
 def draw_rect(t,size,first=0.5,second=1):
     for i in range(2):
         draw_turning(t,size,first,second)
         rt(t)
+
+def draw_hoof(t,size,side=0.5,top=1):
+    draw_turning(t,size,side,top)
+    rt(t)
+    fd(t,size,side)
 
 def draw_vertical_line(t,size,percentage=1):
     resetting(t,vertical,t,fd,t,size,percentage)
@@ -87,17 +89,14 @@ def draw_dot(t):
 
 def draw_tail(t,size,percentage=0.7,endingLeft=True):
     heading = t.heading()
+    seth(t,270)
     if endingLeft:
-        seth(t,270)
         resetting(t,draw_turning,t,size,0.2,percentage)
     else:
-        teleport(t,size,percentage,-0.2)
-        seth(t,180)
-        draw_turning(t,size,percentage,0.2)
+        resetting(t,draw_turning,t,size,percentage,0.2,270)
     seth(t,heading)
 
 # Interface
-
 def draw_a(t,size):
     lt(t)
     draw_rect(t,size,first=0.25)
@@ -108,20 +107,19 @@ def draw_a(t,size):
 def draw_b(t,size):
     lt(t)
     draw_rect(t,size)
-    # resetting(t,fd,t,size,1)
     draw_vertical_line(t,size)
     skip(t,size)
 
 def draw_c(t,size):
-    lt(t)
-    resetting(t,draw_turning,t,size,0.5,1)
     prepare(t,size)
+    at(t)
+    draw_hoof(t,size,1,0.5)
+    teleport(t,size,0,-0.5)
 
 def draw_d(t,size):
     lt(t)
     draw_rect(t,size)
     prepare(t,size)
-    # resetting(t,vertical,t,fd,t,size,1)
     draw_vertical_line(t,size)
 
 def draw_e(t,size):
@@ -149,8 +147,7 @@ def draw_g(t,size):
 def draw_h(t,size):
     draw_vertical_line(t,size)
     lt(t)
-    draw_turning(t,size,0.5,1)
-    vertical(t,fd,t,size,-0.5)
+    draw_hoof(t,size)
 
 def draw_i(t,size):
     skip(t,size,0.5)
@@ -183,15 +180,13 @@ def draw_l(t,size):
 def draw_m(t,size):
     for i in range(2):
         lt(t)
-        draw_turning(t,size,0.5,0.5)
-        vertical(t,fd,t,size,-0.5)
+        draw_hoof(t,size,top=0.5)
+        lt(t)
 
-# encap later
 def draw_n(t,size):
     skip(t,size,0.25)
     lt(t)
-    draw_turning(t,size,0.5,0.5)
-    vertical(t,fd,t,size,-0.5)
+    draw_hoof(t,size,top=0.5)
     skip(t,size,0.25)
 
 def draw_o(t,size):
@@ -219,13 +214,9 @@ def draw_r(t,size):
     skip(t,size,0.65)
 
 def draw_s(t,size):
-    for i in (1,0.25):
-        fd(t,size,i)
-        lt(t)
-    for i in (1,0.25):
-        fd(t,size,i)
-        rt(t)
-    fd(t,size,1)
+    draw_turning(t,size,1,0.25,270)
+    lt(t)
+    draw_hoof(t,size,1,0.25)
     teleport(t,size,0,-0.5)
 
 
