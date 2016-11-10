@@ -172,7 +172,7 @@ def draw_k(t,size):
     side = 0.35*math.sqrt(2)
     lt(t,135)
     resetting(t,draw_turning,t,size,side,side)
-    skip(t,size,0.45)
+    skip(t,size,0.3)
 
 def draw_l(t,size):
     skip(t,size,0.4)
@@ -210,6 +210,24 @@ def draw_q(t,size):
     draw_rect(t,size)
     prepare(t,size)
     resetting(t,vertical,t,fd,t,size,-0.2)
+
+def draw_r(t,size):
+    skip(t,size,0.35)
+    draw_vertical_line(t,size,0.5)
+    lt(t)
+    resetting(t,draw_turning,t,size,0.35,0.35)
+    skip(t,size,0.65)
+
+def draw_s(t,size):
+    for i in (1,0.25):
+        fd(t,size,i)
+        lt(t)
+    for i in (1,0.25):
+        fd(t,size,i)
+        rt(t)
+    fd(t,size,1)
+    teleport(t,size,0,-0.5)
+
 
 def prepare(t,size,percentage=1):
     seth(t)
