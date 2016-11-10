@@ -19,12 +19,15 @@ def incognito(t,func,*args,**kwargs):
     func(*args,**kwargs)
     t.pendown()
 
-def teleport(t,size,x,y):
+def teleport(t,size,x,y,traceless=True):
     pos = t.pos()
-    goto(t,pos[0]+distance(size,x),pos[1]+distance(size,y))
+    goto(t,pos[0]+distance(size,x),pos[1]+distance(size,y),traceless)
 
-def goto(t,x,y):
-    incognito(t,t.goto,(x,y))
+def goto(t,x,y,traceless=True):
+    if traceless:
+        incognito(t,t.goto,(x,y))
+    else:
+        t.goto((x,y))
 
 def resetting(t,func,*args,**kwargs):
     pos = t.pos()
@@ -176,6 +179,37 @@ def draw_l(t,size):
     draw_vertical_line(t,size)
     draw_tail(t,size,percentage=0.35,endingLeft=False)
     skip(t,size,0.6)
+
+def draw_m(t,size):
+    for i in range(2):
+        lt(t)
+        draw_turning(t,size,0.5,0.5)
+        vertical(t,fd,t,size,-0.5)
+
+# encap later
+def draw_n(t,size):
+    skip(t,size,0.25)
+    lt(t)
+    draw_turning(t,size,0.5,0.5)
+    vertical(t,fd,t,size,-0.5)
+    skip(t,size,0.25)
+
+def draw_o(t,size):
+    lt(t)
+    draw_rect(t,size)
+    prepare(t,size)
+
+def draw_p(t,size):
+    lt(t)
+    draw_rect(t,size)
+    resetting(t,vertical,t,fd,t,size,-0.2)
+    prepare(t,size)
+
+def draw_q(t,size):
+    lt(t)
+    draw_rect(t,size)
+    prepare(t,size)
+    resetting(t,vertical,t,fd,t,size,-0.2)
 
 def prepare(t,size,percentage=1):
     seth(t)
