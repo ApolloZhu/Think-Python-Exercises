@@ -133,10 +133,9 @@ def draw_f(t,size):
     skip(t,size/2)
     lt(t)
     resetting(t,draw_turning,t,size,0.7,0.5)
-    draw_turning(t,size,0.5,0.5)
-    at(t)
-    fd(t,size,1)
-    teleport(t,size,1,-0.5)
+    teleport(t,size,-0.5,0.5)
+    prepare(t,size)
+    teleport(t,size,0,-0.5)
 
 def draw_g(t,size):
     lt(t)
