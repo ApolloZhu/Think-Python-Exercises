@@ -68,7 +68,10 @@ def draw_square(t,size,percentage):
 
 def draw_turning(t,size,first,second,rtAngle=90):
     fd(t,size,first)
-    rt(t,rtAngle)
+    if rtAngle <= 180:
+        rt(t,rtAngle)
+    else:
+        lt(t,360-rtAngle)
     fd(t,size,second)
 
 def draw_rect(t,size,first=0.5,second=1):
@@ -76,9 +79,13 @@ def draw_rect(t,size,first=0.5,second=1):
         draw_turning(t,size,first,second)
         rt(t)
 
-def draw_hoof(t,size,side=0.5,top=1):
-    draw_turning(t,size,side,top)
-    rt(t)
+def draw_hoof(t,size,side=0.5,top=1,turnsRight=True):
+    if turnsRight:
+        draw_turning(t,size,side,top)
+        rt(t)
+    else:
+        draw_turning(t,size,side,top,270)
+        lt(t)
     fd(t,size,side)
 
 def draw_vertical_line(t,size,percentage=1):
@@ -118,10 +125,9 @@ def draw_b(t,size):
     skip(t,size)
 
 def draw_c(t,size):
-    prepare(t,size)
+    teleport(t,size,1,0.5)
     at(t)
-    draw_hoof(t,size,1,0.5)
-    teleport(t,size,0,-0.5)
+    draw_hoof(t,size,1,0.5,False)
 
 def draw_d(t,size):
     lt(t)
@@ -226,6 +232,12 @@ def draw_s(t,size):
 def draw_t(t,size):
     draw_cross(t,size)
     skip(t,size,0.5)
+
+def draw_u(t,size):
+    teleport(t,size,0.25,0.5)
+    rt(t)
+    draw_hoof(t,size,top=0.5,turnsRight=False)
+    teleport(t,size,0.25,-0.5)
 
 def prepare(t,size,percentage=1):
     seth(t)
