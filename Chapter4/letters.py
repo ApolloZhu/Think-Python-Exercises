@@ -96,6 +96,13 @@ def draw_tail(t,size,percentage=0.7,endingLeft=True):
         resetting(t,draw_turning,t,size,percentage,0.2,270)
     seth(t,heading)
 
+def draw_cross(t,size,v=0.7,h=1):
+    skip(t,size/2)
+    vertical(t,fd,t,size,v)
+    teleport(t,size,-h/2,0.5-v)
+    fd(t,size,h)
+    teleport(t,size,-h/2,-0.5)
+
 # Interface
 def draw_a(t,size):
     lt(t)
@@ -130,12 +137,10 @@ def draw_e(t,size):
     prepare(t,size)
 
 def draw_f(t,size):
-    skip(t,size/2)
+    draw_cross(t,size)
     lt(t)
-    resetting(t,draw_turning,t,size,0.7,0.5)
-    teleport(t,size,-0.5,0.5)
-    prepare(t,size)
-    teleport(t,size,0,-0.5)
+    draw_turning(t,size,0.7,0.5)
+    teleport(t,size,0,-0.7)
 
 def draw_g(t,size):
     lt(t)
@@ -218,6 +223,9 @@ def draw_s(t,size):
     draw_hoof(t,size,1,0.25)
     teleport(t,size,0,-0.5)
 
+def draw_t(t,size):
+    draw_cross(t,size)
+    skip(t,size,0.5)
 
 def prepare(t,size,percentage=1):
     seth(t)
