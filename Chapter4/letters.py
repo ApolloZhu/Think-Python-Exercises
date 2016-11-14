@@ -239,6 +239,12 @@ def draw_u(t,size):
     draw_hoof(t,size,top=0.5,turnsRight=False)
     teleport(t,size,0.25,-0.5)
 
+def draw_v(t,size):
+    teleport(t,size,0.25,0.5)
+    teleport(t,size,0.25,-0.5,False)
+    teleport(t,size,0.25,0.5,False)
+    teleport(t,size,0.25,-0.5)
+
 def prepare(t,size,percentage=1):
     seth(t)
     fd(t,size,percentage)
